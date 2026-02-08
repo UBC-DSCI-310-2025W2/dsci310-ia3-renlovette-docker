@@ -1,0 +1,34 @@
+name: Build and push docker image
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+    - 'Dockerfile'
+    
+  pull_request:
+    branches: ["main"]
+    paths:
+    - 'Dockerfile'
+    
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Check out the repo
+      uses: actions/checkout@v4
+    
+    - name: Login to Docker Hub
+      uses: docker/login-action@v3
+      with:
+        username: ${{secrets.DOCKER_USERNAME}}
+        password: ${{secrets.DOCKER_PASSWORD}}
+
+    - name: Build and push docker image
+      uses: docker/build-push-action@v6
+      with:
+        context: .
+        file: ./Dockerfile
+        push: true
+        tags: renlovette/dsci310-ia3-renlovette-docker
