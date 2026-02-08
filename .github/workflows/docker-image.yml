@@ -31,4 +31,5 @@ jobs:
         context: .
         file: ./Dockerfile
         push: true
-        tags: renlovette/dsci310-ia3-renlovette-docker
+        tags: renlovette/dsci310-ia3-renlovette-docker:v1.0
+        
